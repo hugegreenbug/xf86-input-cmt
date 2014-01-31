@@ -88,7 +88,7 @@ static void libevdev_log_x(void* udata, int level, const char* format, ...) {
     type = X_ERROR;
     verb = -1;
   }
-  xf86VIDrvMsgVerb(info, type, verb, format, args);
+  LogMessageVerbSigSafe(type, verb, format, args);
   va_end(args);
 }
 
@@ -316,7 +316,8 @@ OpenDevice(InputInfoPtr info)
             ERR(info, "No Device specified.\n");
             return BadValue;
         }
-        xf86IDrvMsg(info, X_CONFIG, "Opening Device: \"%s\"\n", cmt->device);
+        LogMessageVerbSigSafe(X_CONFIG, 
+			      "Opening Device: \"%s\"\n", cmt->device);
     }
 
     if (info->fd < 0) {
