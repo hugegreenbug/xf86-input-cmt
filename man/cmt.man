@@ -1,0 +1,51 @@
+.\" shorthand for double quote that works everywhere.
+.ds q \N'34'
+.TH CMT __drivermansuffix__ __vendorversion__
+.SH NAME
+cmt \- Chromium multitouch input driver for Xorg X server
+.SH SYNOPSIS
+.nf
+ .B "Section \*qInputDevice\*q"
+.BI "  Identifier \*q" devname \*q
+.B  "  Driver \*qcmt\*q"
+.BI "  Option \*qDevice\*q   \*q" devpath \*q
+.BI "  Option \*qTapToClick\*q \*qon\*q"
+\ \ ...
+.B EndSection
+.fi
+.SH DESCRIPTION
+.B cmt
+is an __xservername__ input driver for Chromium OS.  It supports touchpads with
+kernel drivers that support the linux multitouch protocol.
+.PP
+It is recommended that
+.B cmt
+devices are configured through the
+.B InputClass
+directive (refer to __xconfigfile__(__filemansuffix__)) instead of manual
+per-device configuration. Devices configured in the
+__xconfigfile__(__filemansuffix__) are not hot-plug capable.
+.PP
+.SH SUPPORTED HARDWARE
+In general, any input device that the kernel has a multitouch compatible driver
+can be accessed through the 
+.B cmt
+driver.
+.PP
+.SH CONFIGURATION DETAILS
+Please refer to __xconfigfile__(__filemansuffix__) for general configuration
+details and for options that can be used with all input drivers.  This
+section only covers configuration details specific to this driver.
+.PP
+The following driver 
+.B Options
+are supported:
+.TP 7
+.BI "Option \*TapToClick\*q \*q" boolean \*q
+Enables Tap To Click.
+.TP 7
+
+.SH AUTHORS
+The Chromium OS Authors
+.SH "SEE ALSO"
+__xservername__(__appmansuffix__), __xconfigfile__(__filemansuffix__), Xserver(__appmansuffix__), X(__miscmansuffix__)

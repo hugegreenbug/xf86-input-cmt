@@ -1,0 +1,34 @@
+# Copyright (c) 2011 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+TEST_OBJECTS=\
+	event_test.o \
+	test_stubs.o
+
+TEST_MAIN=test_main.o
+
+TEST_EXE=./test
+
+LOCAL_CFLAGS=\
+	$(shell $(PKG_CONFIG) --cflags pixman-1)
+
+CFLAGS+=$(LOCAL_CFLAGS)
+CXXFLAGS+=$(LOCAL_CFLAGS)
+
+LDFLAGS+=\
+	-lgestures \
+	-lgtest
+
+dotest: $(TEST_EXE)
+	$(TEST_EXE)
+
+%.o : %.cc
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(TEST_EXE): $(OBJECTS) $(TEST_OBJECTS) $(TEST_MAIN)
+	$(CXX) -o $@ $(OBJECTS) $(TEST_OBJECTS) $(TEST_MAIN) $(LDFLAGS) \
+		${S}/../*_build/src/.libs/*.o

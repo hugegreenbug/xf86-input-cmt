@@ -1,0 +1,6 @@
+sdkdir=@sdkdir@
+
+Name: xorg-cmt
+Description: X.Org cmt input driver.
+Version: @PACKAGE_VERSION@
+Cflags: -I${sdkdir}
