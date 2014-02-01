@@ -465,9 +465,9 @@ InitializeXDevice(DeviceIntPtr dev)
 
     /* Inititialize the Scroll Valuators */
     SetScrollValuator(dev, CMT_AXIS_SCROLL_X, SCROLL_TYPE_HORIZONTAL,
-                      4, 0);
+                      6, 0);
     SetScrollValuator(dev, CMT_AXIS_SCROLL_Y, SCROLL_TYPE_VERTICAL,
-                      4, 0);
+                      6, 0);
     return Success;
 }
 
