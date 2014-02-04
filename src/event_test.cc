@@ -12,8 +12,8 @@ extern "C" {
 #define new new_
 #define private private_
 #define public public_
-#include "libevdev_cmt.h"
-#include "libevdev_event.h"
+#include "libevdevc_cmt.h"
+#include "libevdevc_event.h"
 #undef bool
 #undef class
 #undef delete

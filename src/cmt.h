@@ -12,7 +12,7 @@
 #include <gesture.h>
 #include <properties.h>
 // todo(denniskempin): allow libevdev to be included before X headers
-#include <libevdev/libevdev.h>
+#include <libevdevc/libevdevc.h>
 
 #define DBG_VERB 7
 #define DBG(info, format, ...) \
