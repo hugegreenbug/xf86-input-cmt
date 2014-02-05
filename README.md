@@ -15,6 +15,7 @@ Configuring
 =============
 You will need to copy over the config files for the driver to the appropriate locations.  The config files are in the xorg-conf directory in this repo.  For a trackpad, copy over the 20-mouse.conf, 40-touchpad-cmt.conf, and a 50-touchpad-cmt file that matches your device to the xorg.conf.d directory for your system (/usr/share/X11/xorg.conf.d on Ubuntu Saucy).
 
+If you use the Ubuntu package, the config files are installed in /usr/share/xf86-input-cmt.
 
 Packages
 ============
