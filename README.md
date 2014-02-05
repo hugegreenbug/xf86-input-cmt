@@ -17,6 +17,8 @@ You will need to copy over the config files for the driver to the appropriate lo
 
 If you use the Ubuntu package, the config files are installed in /usr/share/xf86-input-cmt.
 
+You will also need to move your old config file out of the way or remove the previous driver.  If you were using the synaptics driver, move the synaptics.conf (/usr/share/X11/xorg.conf.d/50-synaptics.conf on Ubuntu) to something other than .conf or remove the synaptics driver.
+
 Packages
 ============
 There is an ubuntu ppa with the latest releases here: https://launchpad.net/~hugegreenbug/+archive/cmt .
