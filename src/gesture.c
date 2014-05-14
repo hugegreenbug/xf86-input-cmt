@@ -362,29 +362,24 @@ static void Gesture_Gesture_Ready(void* client_data,
 				 move->ordinal_dy,
 				 FALSE);
 		xf86PostMotionEventM(dev, FALSE, mask);
+
 		break;
         }
         case kGestureTypeScroll: {
 		const GestureScroll* scroll = &gesture->details.scroll;
 		DBG(info, "Gesture Scroll: (%f, %f) [%f, %f]\n",
 		    scroll->dx, scroll->dy, scroll->ordinal_dx, scroll->ordinal_dy);
-/*            valuator_mask_set_double(mask, CMT_AXIS_SCROLL_X, scroll->dx);
-	      valuator_mask_set_double(mask, CMT_AXIS_SCROLL_Y, scroll->dy);
-	      valuator_mask_set_double(mask, CMT_AXIS_FINGER_COUNT, 2.0);
-	      SetTimeValues(mask, gesture, dev, TRUE);
-	      SetOrdinalValues(mask,
-	      dev,
-	      scroll->ordinal_dx,
-	      scroll->ordinal_dy,
-	      TRUE);
-*/
-            
 		valuator_mask_set_double(mask, CMT_AXIS_SCROLL_X, 
 					 scroll->ordinal_dx);
 		valuator_mask_set_double(mask, CMT_AXIS_SCROLL_Y, 
 					 scroll->ordinal_dy);
+		valuator_mask_set_double(mask, CMT_AXIS_FINGER_COUNT, 2.0);
 		SetTimeValues(mask, gesture, dev, TRUE);
-
+		SetOrdinalValues(mask,
+				 dev,
+				 scroll->ordinal_dx,
+				 scroll->ordinal_dy,
+				 TRUE);
 		xf86PostMotionEventM(dev, FALSE, mask);
 		break;
         }
@@ -405,67 +400,6 @@ static void Gesture_Gesture_Ready(void* client_data,
 			xf86PostButtonEventM(dev, TRUE, CMT_BTN_MIDDLE, 0, mask);
 		if (buttons->up & GESTURES_BUTTON_RIGHT)
 			xf86PostButtonEventM(dev, TRUE, CMT_BTN_RIGHT, 0, mask);
-		break;
-        }
-        case kGestureTypeFling: {
-		const GestureFling* fling = &gesture->details.fling;
-		DBG(info, "Gesture Fling: (%f, %f) [%f, %f] fling_state=%d\n",
-		    fling->vx, fling->vy, fling->ordinal_vx, fling->ordinal_vy,
-		    fling->fling_state);
-		valuator_mask_set_double(mask, CMT_AXIS_DBL_FLING_VX, fling->vx);
-		valuator_mask_set_double(mask, CMT_AXIS_DBL_FLING_VY, fling->vy);
-		valuator_mask_set(mask, CMT_AXIS_FLING_STATE, fling->fling_state);
-		SetTimeValues(mask, gesture, dev, TRUE);
-		SetOrdinalValues(mask,
-				 dev,
-				 fling->ordinal_vx,
-				 fling->ordinal_vy,
-				 TRUE);
-		xf86PostMotionEventM(dev, TRUE, mask);
-		break;
-        }
-        case kGestureTypeSwipe: {
-		const GestureSwipe* swipe = &gesture->details.swipe;
-		DBG(info, "Gesture Swipe: (%f, %f) [%f, %f]\n",
-		    swipe->dx, swipe->dy, swipe->ordinal_dx, swipe->ordinal_dy);
-		valuator_mask_set_double(mask, CMT_AXIS_SCROLL_X, swipe->dx);
-		valuator_mask_set_double(mask, CMT_AXIS_SCROLL_Y, swipe->dy);
-		valuator_mask_set_double(mask, CMT_AXIS_FINGER_COUNT, 3.0);
-		SetTimeValues(mask, gesture, dev, TRUE);
-		SetOrdinalValues(mask,
-				 dev,
-				 swipe->ordinal_dx,
-				 swipe->ordinal_dy,
-				 TRUE);
-		xf86PostMotionEventM(dev, TRUE, mask);
-		break;
-        }
-        case kGestureTypeSwipeLift:
-		DBG(info, "Gesture Swipe Lift\n");
-		// Turn a swipe lift into a fling start.
-		SetTimeValues(mask, gesture, dev, TRUE);
-		valuator_mask_set_double(mask, CMT_AXIS_DBL_FLING_VX, 0);
-		valuator_mask_set_double(mask, CMT_AXIS_DBL_FLING_VY, 0);
-		valuator_mask_set(mask, CMT_AXIS_FLING_STATE, 0);
-		xf86PostMotionEventM(dev, TRUE, mask);
-		break;
-        case kGestureTypePinch: {
-		const GesturePinch* pinch = &gesture->details.pinch;
-		DBG(info, "Gesture Pinch: dz=%f [%f]\n",
-		    pinch->dz, pinch->ordinal_dz);
-		break;
-        }
-        case kGestureTypeMetrics: {
-		const GestureMetrics* metrics = &gesture->details.metrics;
-		DBG(info, "Gesture Metrics: [%f, %f] type=%d\n",
-		    metrics->data[0], metrics->data[1], metrics->type);
-		valuator_mask_set_double(mask, CMT_AXIS_METRICS_DATA1,
-					 metrics->data[0]);
-		valuator_mask_set_double(mask, CMT_AXIS_METRICS_DATA2,
-					 metrics->data[1]);
-		valuator_mask_set(mask, CMT_AXIS_METRICS_TYPE, metrics->type);
-		SetTimeValues(mask, gesture, dev, TRUE);
-		xf86PostMotionEventM(dev, TRUE, mask);
 		break;
         }
         default:
