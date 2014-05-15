@@ -26,8 +26,11 @@ xinput --list-props 12
 Place your xinput commands in ~/.xsessionrc to have them run when your X11 session starts. Here is my .xsessionrc that enables tag and drag, modifies the sensitivity of tap and drag, increases the speed of the pointer, and increases the sensitivity of two finger scrolling:
 
 xinput set-int-prop 12 "Tap Drag Enable" 8 1
+
 xinput set-float-prop 12 "Tap Drag Delay" 0.060000
+
 xinput set-int-prop 12 "Pointer Sensitivity" 32 4
+
 xinput set-int-prop 12 "Scroll Sensitivity" 32 40
 
 Packages
