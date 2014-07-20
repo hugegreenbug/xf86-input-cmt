@@ -31,7 +31,14 @@ xinput set-float-prop 12 "Tap Drag Delay" 0.060000
 
 xinput set-int-prop 12 "Pointer Sensitivity" 32 4
 
-xinput set-int-prop 12 "Scroll Sensitivity" 32 40
+xinput --set-float-prop 12 "Two Finger Scroll Distance Thresh" 40.0
+
+xinput --set-float-prop 12 "Two Finger Horizontal Close Distance Thresh" 100.0
+
+xinput --set-float-prop 12 "Two Finger Vertical Close Distance Thresh" 85.0
+
+xinput --set-float-prop 12 "Two Finger Pressure Diff Thresh" 80.0
+
 
 Packages
 ============
