@@ -369,10 +369,19 @@ static void Gesture_Gesture_Ready(void* client_data,
 		const GestureScroll* scroll = &gesture->details.scroll;
 		DBG(info, "Gesture Scroll: (%f, %f) [%f, %f]\n",
 		    scroll->dx, scroll->dy, scroll->ordinal_dx, scroll->ordinal_dy);
-		valuator_mask_set_double(mask, CMT_AXIS_SCROLL_X, 
-					 scroll->dx);
-		valuator_mask_set_double(mask, CMT_AXIS_SCROLL_Y, 
-					 scroll->dy);
+
+		if (cmt->props.scroll_australian) {
+		  valuator_mask_set_double(mask, CMT_AXIS_SCROLL_Y, 
+					   -scroll->dy);
+		  valuator_mask_set_double(mask, CMT_AXIS_SCROLL_X, 
+					   -scroll->dx);
+		} else {
+		  valuator_mask_set_double(mask, CMT_AXIS_SCROLL_Y, 
+					   scroll->dy);
+		  valuator_mask_set_double(mask, CMT_AXIS_SCROLL_X, 
+					   scroll->dx);
+		}
+
 		valuator_mask_set_double(mask, CMT_AXIS_FINGER_COUNT, 2.0);
 		SetTimeValues(mask, gesture, dev, TRUE);
 		SetOrdinalValues(mask,

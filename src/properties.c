@@ -179,6 +179,12 @@ PropertiesInit(DeviceIntPtr dev)
                     1,
                     &bool_false);
 
+    PropCreate_Bool(dev,
+                    CMT_PROP_SCROLL_AUSTRALIAN,
+                    &props->scroll_australian,
+                    1,
+                    &bool_false);
+
     return Success;
 }
 
