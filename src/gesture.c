@@ -448,8 +448,8 @@ Gesture_TimerSet(void* provider_data,
 		return;
 	timer->callback = callback;
 	timer->callback_data = callback_data;
-	if (ms == 0)
-		ms = 1;
+	if (ms < 100)
+		ms = 100;
 	TimerSet(timer->timer, 0, ms, Gesture_TimerCallback, timer);
 }
 
@@ -492,6 +492,10 @@ Gesture_TimerCallback(OsTimerPtr timer,
 		next_timeout = rc * 1000.0;
 		if (next_timeout == 0)
 			next_timeout = 1;
+	}
+
+	if (next_timeout < 100) {
+		next_timeout = 100;
 	}
 
 	return next_timeout;
