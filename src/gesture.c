@@ -490,12 +490,8 @@ Gesture_TimerCallback(OsTimerPtr timer,
 	rc = tm->callback(now, tm->callback_data);
 	if (rc >= 0.0) {
 		next_timeout = rc * 1000.0;
-		if (next_timeout == 0)
-			next_timeout = 1;
-	}
-
-	if (next_timeout < 100) {
-		next_timeout = 100;
+		if (next_timeout < 100)
+			next_timeout = 100;
 	}
 
 	return next_timeout;
