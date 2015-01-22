@@ -46,7 +46,7 @@ For faster acceleration:
 
 xinput --set-float-prop 12 "Quick Acceleration Factor" 5
 
-xinput --set-float-prop 12 "Accel Min dt" 0.00
+xinput --set-float-prop 12 "Accel Min dt" 0.0005
 
 
 To disable tapping:
