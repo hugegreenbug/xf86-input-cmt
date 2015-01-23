@@ -42,21 +42,25 @@ For Australian scrolling:
 xinput --set-int-prop $ID "Scroll Australian" 8 1
 
 
+To speed up the pointer:
+
+xinput --set-float-prop $ID "Point Y Out Scale" 1.3
+
+xinput --set-float-prop $ID "Point X Out Scale" 1.3
+
+
 For faster acceleration:
 
-xinput --set-float-prop 12 "Quick Acceleration Factor" 5
-
-xinput --set-float-prop 12 "Accel Min dt" 0.0005
-
+xinput --set-float-prop $ID "Quick Acceleration Factor" 2
 
 To disable tapping:
 
-xinput --set-int-prop 12 "Tap Enable" 8 0
+xinput --set-int-prop $ID "Tap Enable" 8 0
 
 
 To disable right clicking on the right side of the touchpad's hardware button:
 
-xinput --set-int-prop 12 "Button Right Click Enable" 8 0
+xinput --set-int-prop $ID "Button Right Click Enable" 8 0
 
 
 Packages
