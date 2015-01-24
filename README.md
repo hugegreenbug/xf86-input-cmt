@@ -48,8 +48,6 @@ xinput --set-float-prop $ID "Point Y Out Scale" 1.3
 
 xinput --set-float-prop $ID "Point X Out Scale" 1.3
 
-This can have the side effect of making taps unresponsive to clicks. You will need to adjust the "Tap Move Distance" option to make clicking by tapping responsive again. Tap Move Distance stands for the distance that the mouse moves that is considered a move and not a tap. If the scale is set to be high, then the distance that is a move is larger. In the example above, the point scale was 1.3, so we should set the Tap Move Distance to atleast one more than the scale. For example:
-xinput --set-float-prop $ID "Tap Move Distance" "2.3"
 
 For faster acceleration:
 
