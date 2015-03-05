@@ -45,6 +45,5 @@
 #define CMT_PROP_SCROLL_AXES "Scroll Axes"
 #define CMT_PROP_DUMP_DEBUG_LOG "Dump Debug Log"
 #define CMT_PROP_RAW_TOUCH_PASSTHROUGH "Raw Touch Passthrough"
-#define CMT_PROP_SCROLL_AUSTRALIAN "Scroll Australian"
 
 #endif

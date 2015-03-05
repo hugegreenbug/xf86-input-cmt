@@ -12,24 +12,23 @@
 #include <gesture.h>
 #include <properties.h>
 // todo(denniskempin): allow libevdev to be included before X headers
-#include <libevdevc/libevdevc.h>
+#include <libevdev/libevdev.h>
 
 #define DBG_VERB 7
 #define DBG(info, format, ...) \
-	LogMessageVerbSigSafe(X_INFO, DBG_VERB, "%s():%d: " format,	\
-			      __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    xf86IDrvMsgVerb((info), X_INFO, DBG_VERB, "%s():%d: " format, \
+        __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define PROBE_DBG(info, format, ...) \
-	LogMessageVerbSigSafe(X_PROBED, DBG_VERB, "%s():%d: " format,	\
-			      __FUNCTION__, __LINE__, ##__VA_ARGS__)
+    xf86IDrvMsgVerb((info), X_PROBED, DBG_VERB, "%s():%d: " format, \
+        __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
-#define CONFIG_DBG(info, format, ...)				\
-	LogMessageVerbSigSafe(X_CONFIG, DBG_VERB, "%s():%d: " format,	\
-			      __FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define CONFIG_DBG(info, format, ...) \
+    xf86IDrvMsgVerb((info), X_CONFIG, DBG_VERB, "%s():%d: " format, \
+        __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define ERR(info, ...) \
-	LogMessageVerbSigSafe(X_ERROR, DBG_VERB, "%s():%d ",            \
-			      __FUNCTION__, __LINE__)
+        xf86IDrvMsg((info), X_ERROR, ##__VA_ARGS__)
 
 #define LONG_BITS (sizeof(long) * 8)
 
@@ -83,6 +82,7 @@ typedef struct {
 
     char* device;
     long  handlers;
+    unsigned long prev_key_state[NLONGS(KEY_CNT)];
 } CmtDeviceRec, *CmtDevicePtr;
 
 #endif

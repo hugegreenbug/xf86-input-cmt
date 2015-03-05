@@ -14,7 +14,7 @@
 #include <xf86.h>
 #include <xf86Xinput.h>
 
-#include "libevdevc/libevdevc.h"
+#include "libevdev/libevdev.h"
 #include "properties.h"
 
 enum SLOT_STATUS {
