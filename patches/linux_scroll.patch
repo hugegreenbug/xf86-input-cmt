@@ -1,0 +1,39 @@
+diff -ruN xf86-input-cmt/src/cmt.c xf86-input-cmt.new/src/cmt.c
+--- xf86-input-cmt/src/cmt.c	2015-03-02 21:20:50.980355653 -0700
++++ xf86-input-cmt.new/src/cmt.c	2015-03-02 22:13:49.072238601 -0700
+@@ -412,8 +412,8 @@
+         1,
+         2,
+         3,
+-        8,  /* Back */
+-        9   /* Forward */
++        4,  /* Back */
++        5   /* Forward */
+     };
+     int i;
+ 
+@@ -475,6 +475,12 @@
+         xf86InitValuatorDefaults(dev, i);
+     }
+ 
++    /* Inititialize the Scroll Valuators */
++    SetScrollValuator(dev, CMT_AXIS_SCROLL_X, SCROLL_TYPE_HORIZONTAL,
++		      30, 0);
++    SetScrollValuator(dev, CMT_AXIS_SCROLL_Y, SCROLL_TYPE_VERTICAL,
++                      30, 0);
++
+     /* Initialize keyboard device struct. Based on xf86-input-evdev,
+        do not allow any rule/layout/etc changes. */
+     xf86ReplaceStrOption(info->options, "xkb_rules", "evdev");
+diff -ruN xf86-input-cmt/src/gesture.c xf86-input-cmt.new/src/gesture.c
+--- xf86-input-cmt/src/gesture.c	2015-03-02 21:20:50.980355653 -0700
++++ xf86-input-cmt.new/src/gesture.c	2015-03-02 22:16:24.124235824 -0700
+@@ -421,7 +421,7 @@
+                              scroll->ordinal_dx,
+                              scroll->ordinal_dy,
+                              TRUE);
+-            xf86PostMotionEventM(dev, TRUE, mask);
++            xf86PostMotionEventM(dev, FALSE, mask);
+             break;
+         }
+         case kGestureTypeButtonsChange: {

@@ -1,0 +1,24 @@
+diff -ruN xf86-input-cmt/src/cmt.h xf86-input-cmt.new/src/cmt.h
+--- xf86-input-cmt/src/cmt.h	2015-03-02 21:20:50.980355653 -0700
++++ xf86-input-cmt.new/src/cmt.h	2015-03-02 14:02:46.134523321 -0700
+@@ -12,7 +12,7 @@
+ #include <gesture.h>
+ #include <properties.h>
+ // todo(denniskempin): allow libevdev to be included before X headers
+-#include <libevdev/libevdev.h>
++#include <libevdevc/libevdevc.h>
+ 
+ #define DBG_VERB 7
+ #define DBG(info, format, ...) \
+diff -ruN xf86-input-cmt/src/gesture.h xf86-input-cmt.new/src/gesture.h
+--- xf86-input-cmt/src/gesture.h	2015-03-02 21:20:50.980355653 -0700
++++ xf86-input-cmt.new/src/gesture.h	2015-03-02 14:02:10.250523964 -0700
+@@ -14,7 +14,7 @@
+ #include <xf86.h>
+ #include <xf86Xinput.h>
+ 
+-#include "libevdev/libevdev.h"
++#include "libevdevc/libevdevc.h"
+ #include "properties.h"
+ 
+ enum SLOT_STATUS {
