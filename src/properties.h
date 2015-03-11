@@ -24,7 +24,6 @@ typedef struct {
     int orientation_minimum;
     int orientation_maximum;
     int raw_passthrough;
-    int scroll_australian;
     GesturesPropBool dump_debug_log;
 } CmtProperties, *CmtPropertiesPtr;
 

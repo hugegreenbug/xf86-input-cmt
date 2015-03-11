@@ -19,6 +19,7 @@
 #include <X11/Xatom.h>
 #include <xf86Xinput.h>
 #include <xf86_OSproc.h>
+#include <xkbsrv.h>
 #include <xserver-properties.h>
 
 #include "properties.h"
@@ -88,7 +89,7 @@ static void libevdev_log_x(void* udata, int level, const char* format, ...) {
     type = X_ERROR;
     verb = -1;
   }
-  LogMessageVerbSigSafe(type, verb, format, args);
+  xf86VIDrvMsgVerb(info, type, verb, format, args);
   va_end(args);
 }
 
@@ -117,7 +118,6 @@ PreInit(InputDriverPtr drv, InputInfoPtr info, int flags)
     if (!cmt)
         return BadAlloc;
 
-    info->type_name               = (char*)XI_TOUCHPAD;
     info->device_control          = DeviceControl;
     info->read_input              = ReadInput;
     info->control_proc            = NULL;
@@ -143,6 +143,13 @@ PreInit(InputDriverPtr drv, InputInfoPtr info, int flags)
         }
         goto Error_Event_Init;
     }
+
+    // The cmt driver currently powers mice, multi-touch mice and touchpads.
+    // We list mice as XI_MOUSE and the others as XI_TOUCHPAD.
+    if (cmt->evdev.info.evdev_class == EvdevClassMouse)
+      info->type_name = (char*)XI_MOUSE;
+    else
+      info->type_name = (char*)XI_TOUCHPAD;
 
     xf86ProcessCommonOptions(info, info->options);
 
@@ -316,8 +323,7 @@ OpenDevice(InputInfoPtr info)
             ERR(info, "No Device specified.\n");
             return BadValue;
         }
-        LogMessageVerbSigSafe(X_CONFIG, 
-			      "Opening Device: \"%s\"\n", cmt->device);
+        xf86IDrvMsg(info, X_CONFIG, "Opening Device: \"%s\"\n", cmt->device);
     }
 
     if (info->fd < 0) {
@@ -345,6 +351,11 @@ OpenDevice(InputInfoPtr info)
  */
 static void
 PointerCtrl(DeviceIntPtr device, PtrCtrl *ctrl)
+{
+}
+
+static void
+KeyboardCtrl(DeviceIntPtr device, KeybdCtrl *ctrl)
 {
 }
 
@@ -392,6 +403,7 @@ InitializeXDevice(DeviceIntPtr dev)
     InputInfoPtr info = dev->public.devicePrivate;
     CmtDevicePtr cmt = info->private;
 
+    XkbRMLVOSet rmlvo = { 0 };
     Atom axes_labels[CMT_NUM_AXES] = { 0 };
     Atom btn_labels[CMT_NUM_BUTTONS] = { 0 };
     /* Map our button numbers to standard ones. */
@@ -400,8 +412,8 @@ InitializeXDevice(DeviceIntPtr dev)
         1,
         2,
         3,
-        4,  /* Back */
-        5   /* Forward */
+        8,  /* Back */
+        9   /* Forward */
     };
     int i;
 
@@ -463,12 +475,18 @@ InitializeXDevice(DeviceIntPtr dev)
         xf86InitValuatorDefaults(dev, i);
     }
 
-    /* Inititialize the Scroll Valuators */
-    SetScrollValuator(dev, CMT_AXIS_SCROLL_X, SCROLL_TYPE_HORIZONTAL,
-		      30, 0);
-    SetScrollValuator(dev, CMT_AXIS_SCROLL_Y, SCROLL_TYPE_VERTICAL,
-                      30, 0);
-    
+    /* Initialize keyboard device struct. Based on xf86-input-evdev,
+       do not allow any rule/layout/etc changes. */
+    xf86ReplaceStrOption(info->options, "xkb_rules", "evdev");
+    rmlvo.rules = xf86SetStrOption(info->options, "xkb_rules", NULL);
+    rmlvo.model = xf86SetStrOption(info->options, "xkb_model", NULL);
+    rmlvo.layout = xf86SetStrOption(info->options, "xkb_layout", NULL);
+    rmlvo.variant = xf86SetStrOption(info->options, "xkb_variant", NULL);
+    rmlvo.options = xf86SetStrOption(info->options, "xkb_options", NULL);
+
+    InitKeyboardDeviceStruct(dev, &rmlvo, NULL, KeyboardCtrl);
+    XkbFreeRMLVOSet(&rmlvo, FALSE);
+
     return Success;
 }
 
