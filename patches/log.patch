@@ -1,0 +1,11 @@
+--- xf86-input-cmt.new/src/cmt.c	2015-03-15 23:08:46.678342643 -0600
++++ xf86-input-cmt.git/src/cmt.c	2015-03-15 23:09:54.906341421 -0600
+@@ -89,7 +89,7 @@
+     type = X_ERROR;
+     verb = -1;
+   }
+-  LogMessageVerbSigSafe(type, verb, format, args);
++  xf86VIDrvMsgVerb(info, type, verb, format, args);
+   va_end(args);
+ }
+ 
