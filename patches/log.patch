@@ -4,8 +4,8 @@
      type = X_ERROR;
      verb = -1;
    }
--  LogMessageVerbSigSafe(type, verb, format, args);
-+  xf86VIDrvMsgVerb(info, type, verb, format, args);
+-  xf86VIDrvMsgVerb(info, type, verb, format, args);
++  LogMessageVerbSigSafe(type, verb, format, args);
    va_end(args);
  }
  
