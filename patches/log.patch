@@ -1,10 +1,68 @@
---- xf86-input-cmt.new/src/cmt.c	2015-03-15 23:08:46.678342643 -0600
-+++ xf86-input-cmt.git/src/cmt.c	2015-03-15 23:09:54.906341421 -0600
+diff -ruN xf86-input-cmt.old/src/cmt.c xf86-input-cmt.git/src/cmt.c
+--- xf86-input-cmt.old/src/cmt.c	2015-03-02 13:11:07.654208023 -0700
++++ xf86-input-cmt.git/src/cmt.c	2015-03-16 20:31:22.947688531 -0600
 @@ -89,7 +89,7 @@
      type = X_ERROR;
      verb = -1;
    }
 -  xf86VIDrvMsgVerb(info, type, verb, format, args);
++  LogMessageVerbSigSafe(type, verb, format, args);
+   va_end(args);
+ }
+ 
+diff -ruN xf86-input-cmt.old/src/cmt.h xf86-input-cmt.git/src/cmt.h
+--- xf86-input-cmt.old/src/cmt.h	2015-03-02 13:11:07.654208023 -0700
++++ xf86-input-cmt.git/src/cmt.h	2015-03-16 20:22:12.375698391 -0600
+@@ -16,15 +16,15 @@
+ 
+ #define DBG_VERB 7
+ #define DBG(info, format, ...) \
+-    xf86IDrvMsgVerb((info), X_INFO, DBG_VERB, "%s():%d: " format, \
++      LogMessageVerbSigSafe(X_INFO, DBG_VERB, "%s():%d: " format,   \
+         __FUNCTION__, __LINE__, ##__VA_ARGS__)
+ 
+ #define PROBE_DBG(info, format, ...) \
+-    xf86IDrvMsgVerb((info), X_PROBED, DBG_VERB, "%s():%d: " format, \
++      LogMessageVerbSigSafe(X_PROBED, DBG_VERB, "%s():%d: " format, \
+         __FUNCTION__, __LINE__, ##__VA_ARGS__)
+ 
+ #define CONFIG_DBG(info, format, ...) \
+-    xf86IDrvMsgVerb((info), X_CONFIG, DBG_VERB, "%s():%d: " format, \
++    LogMessageVerbSigSafe(X_CONFIG, DBG_VERB, "%s():%d: " format, \
+         __FUNCTION__, __LINE__, ##__VA_ARGS__)
+ 
+ #define ERR(info, ...) \
+diff -ruN xf86-input-cmt.old/src/gesture.c xf86-input-cmt.git/src/gesture.c
+--- xf86-input-cmt.old/src/gesture.c	2015-03-02 13:11:07.658210023 -0700
++++ xf86-input-cmt.git/src/gesture.c	2015-03-16 20:31:22.947688531 -0600
+@@ -618,8 +618,8 @@
+   va_list args;
+   va_start(args, fmt);
+   if (verb > 0)
+-    xf86VDrvMsgVerb(-1, X_INFO, 7, fmt, args);
++    LogMessageVerbSigSafe(X_INFO, 7, fmt, args);
+   else
+-    xf86VDrvMsgVerb(-1, X_ERROR, 0, fmt, args);
++    LogMessageVerbSigSafe(X_ERROR, 0, fmt, args);
+   va_end(args);
+ }
+diff -ruN xf86-input-cmt.old/src/test_stubs.c xf86-input-cmt.git/src/test_stubs.c
+--- xf86-input-cmt.old/src/test_stubs.c	2015-03-02 13:11:07.658210023 -0700
++++ xf86-input-cmt.git/src/test_stubs.c	2015-03-16 20:27:17.907692919 -0600
+@@ -87,7 +87,7 @@
+                  const char* format, ...) {
+   va_list args;
+   va_start(args, format);
+-  xf86VIDrvMsgVerb(dev, type, -1, format, args);
++  LogMessageVerbSigSafe(type, -1, format, args);
+   va_end(args);
+ }
+ 
+@@ -95,7 +95,7 @@
+                      const char* format, ...) {
+   va_list args;
+   va_start(args, format);
+-  xf86VIDrvMsgVerb(dev, type, verb, format, args);
 +  LogMessageVerbSigSafe(type, verb, format, args);
    va_end(args);
  }
