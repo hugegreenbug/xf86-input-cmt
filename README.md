@@ -53,5 +53,6 @@ Place that in your ~/.xsessionrc to make it permanant.
 
 Packages
 ============
-There is an ubuntu ppa with the latest releases here: https://launchpad.net/~hugegreenbug/+archive/cmt .
+There is an ubuntu ppa with the latest releases here: https://launchpad.net/~hugegreenbug/+archive/cmt2 .
+There is an ubuntu ppa with the old stack here: https://launchpad.net/~hugegreenbug/+archive/cmt .
 
