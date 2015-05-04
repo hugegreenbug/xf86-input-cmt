@@ -1,18 +1,30 @@
-diff -ruN xf86-input-cmt.old/src/cmt.c xf86-input-cmt.git/src/cmt.c
---- xf86-input-cmt.old/src/cmt.c	2015-03-02 13:11:07.654208023 -0700
-+++ xf86-input-cmt.git/src/cmt.c	2015-03-16 20:31:22.947688531 -0600
-@@ -89,7 +89,7 @@
+diff -ruN xf86-input-cmt/src/cmt.c xf86-input-cmt.new/src/cmt.c
+--- xf86-input-cmt/src/cmt.c	2015-05-04 14:02:23.360061920 -0400
++++ xf86-input-cmt.new/src/cmt.c	2015-05-04 14:01:29.961376876 -0400
+@@ -76,6 +76,8 @@
+   InputInfoPtr info = udata;
+   int verb;
+   int type;
++  int msg_size = 256;
++  char msg[msg_size];
+ 
+   va_list args;
+   va_start(args, format);
+@@ -89,8 +91,10 @@
      type = X_ERROR;
      verb = -1;
    }
 -  xf86VIDrvMsgVerb(info, type, verb, format, args);
-+  LogMessageVerbSigSafe(type, verb, format, args);
++
++  vsnprintf(msg, msg_size, format, args);
    va_end(args);
++  LogMessageVerbSigSafe(type, verb, msg, "");
  }
  
-diff -ruN xf86-input-cmt.old/src/cmt.h xf86-input-cmt.git/src/cmt.h
---- xf86-input-cmt.old/src/cmt.h	2015-03-02 13:11:07.654208023 -0700
-+++ xf86-input-cmt.git/src/cmt.h	2015-03-16 20:22:12.375698391 -0600
+ /**
+diff -ruN xf86-input-cmt/src/cmt.h xf86-input-cmt.new/src/cmt.h
+--- xf86-input-cmt/src/cmt.h	2015-05-04 14:02:23.360061920 -0400
++++ xf86-input-cmt.new/src/cmt.h	2015-05-04 13:59:11.140003360 -0400
 @@ -16,15 +16,15 @@
  
  #define DBG_VERB 7
@@ -32,23 +44,31 @@ diff -ruN xf86-input-cmt.old/src/cmt.h xf86-input-cmt.git/src/cmt.h
          __FUNCTION__, __LINE__, ##__VA_ARGS__)
  
  #define ERR(info, ...) \
-diff -ruN xf86-input-cmt.old/src/gesture.c xf86-input-cmt.git/src/gesture.c
---- xf86-input-cmt.old/src/gesture.c	2015-03-02 13:11:07.658210023 -0700
-+++ xf86-input-cmt.git/src/gesture.c	2015-03-16 20:31:22.947688531 -0600
-@@ -618,8 +618,8 @@
+diff -ruN xf86-input-cmt/src/gesture.c xf86-input-cmt.new/src/gesture.c
+--- xf86-input-cmt/src/gesture.c	2015-05-04 14:02:23.360061920 -0400
++++ xf86-input-cmt.new/src/gesture.c	2015-05-04 14:02:07.416094204 -0400
+@@ -615,11 +615,15 @@
+ }
+ 
+ _X_EXPORT void gestures_log(int verb, const char* fmt, ...) {
++  int msg_size = 256;
++  char msg[msg_size];
++
    va_list args;
    va_start(args, fmt);
++  vsnprintf(msg, msg_size, fmt, args);
++  va_end(args);
    if (verb > 0)
 -    xf86VDrvMsgVerb(-1, X_INFO, 7, fmt, args);
-+    LogMessageVerbSigSafe(X_INFO, 7, fmt, args);
++    LogMessageVerbSigSafe(X_INFO, 7, msg, "");
    else
 -    xf86VDrvMsgVerb(-1, X_ERROR, 0, fmt, args);
-+    LogMessageVerbSigSafe(X_ERROR, 0, fmt, args);
-   va_end(args);
+-  va_end(args);
++    LogMessageVerbSigSafe(X_ERROR, 0, msg, "");
  }
-diff -ruN xf86-input-cmt.old/src/test_stubs.c xf86-input-cmt.git/src/test_stubs.c
---- xf86-input-cmt.old/src/test_stubs.c	2015-03-02 13:11:07.658210023 -0700
-+++ xf86-input-cmt.git/src/test_stubs.c	2015-03-16 20:27:17.907692919 -0600
+diff -ruN xf86-input-cmt/src/test_stubs.c xf86-input-cmt.new/src/test_stubs.c
+--- xf86-input-cmt/src/test_stubs.c	2015-05-04 14:02:23.360061920 -0400
++++ xf86-input-cmt.new/src/test_stubs.c	2015-05-04 13:59:11.140003360 -0400
 @@ -87,7 +87,7 @@
                   const char* format, ...) {
    va_list args;
