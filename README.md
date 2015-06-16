@@ -31,17 +31,21 @@ xinput
 Place the options you wish to change in the touchpad config file that you copied over to /usr/share/X11/xorg.conf.d.
 
 My tweaks for the Acer C720 are:
-    Option          "Tap Timeout" "2.0"
-    Option          "Two Finger Pressure Diff Thresh" "80.0"
-    Option          "Tap Min Separation" "10.0"
-    Option          "Tap Drag Enable" "1"
-    Option          "Tap Drag Delay" "0.060000"
-    Option          "Pointer Sensitivity" "4"
-    Option          "Palm Pressure" "100"
-    Option          "Stationary Wiggle Filter Enabled" "1"
-    Option          "Smooth Accel" "1"
-    Option          "Tap Minimum Pressure" "0.5"
-    Option          "Finger Moving Hysteresis" "0.015"
+
+Option          "Two Finger Pressure Diff Thresh" "80.0"
+
+Option          "Tap Drag Enable" "1"
+
+Option          "Tap Drag Delay" "0.060000"
+
+Option          "AccelerationScheme" "none"
+
+Option          "AccelerationNumerator" "0"
+
+Option          "AccelerationDenominator" "1"
+
+Option          "AccelerationThreshold" "0"
+
 
 Notes
 ============
