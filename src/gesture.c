@@ -140,8 +140,8 @@ Gesture_Device_Init(GesturePtr rec, DeviceIntPtr dev)
     hwprops.bottom          = props->area_bottom;
     hwprops.res_x           = props->res_x;
     hwprops.res_y           = props->res_y;
-    hwprops.screen_x_dpi    = 96;
-    hwprops.screen_y_dpi    = 96;
+    hwprops.screen_x_dpi    = 133;
+    hwprops.screen_y_dpi    = 133;
     hwprops.orientation_minimum = props->orientation_minimum;
     hwprops.orientation_maximum = props->orientation_maximum;
     hwprops.max_finger_cnt  = evstate->slot_count;
