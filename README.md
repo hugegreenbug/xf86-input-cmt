@@ -49,11 +49,16 @@ Option          "AccelerationThreshold" "0"
 
 Notes
 ============
-Standard X acceleration settings will interfere with the driver settings and make the pointer less responsive. Disable them like this:
+Standard X acceleration settings will interfere with the driver settings and make the pointer less responsive. Disable them by putting the following in 40-touchpad-cmt.conf:
 
-xinput set-ptr-feedback "trackpad_id" 0 0 1
+Option          "AccelerationProfile" "-1"
+Option          "AccelerationScheme" "none"
+Option          "AccelerationNumerator" "0"
+Option          "AccelerationDenominator" "1"
+Option          "AccelerationThreshold" "0"
 
-Place that in your ~/.xsessionrc to make it permanant.
+
+This driver works best if the X server is set to use 133 as the dpi. This can be done by start X with the -dpi 133. In Ubuntu, lightdm starts X with the command in /usr/share/lightdm/lightdm.conf.d/50-xserver-command.conf 
 
 Packages
 ============
