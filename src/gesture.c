@@ -421,7 +421,7 @@ static void Gesture_Gesture_Ready(void* client_data,
                              scroll->ordinal_dx,
                              scroll->ordinal_dy,
                              TRUE);
-            xf86PostMotionEventM(dev, TRUE, mask);
+            xf86PostMotionEventM(dev, FALSE, mask);
             break;
         }
         case kGestureTypeButtonsChange: {
@@ -615,11 +615,15 @@ Gesture_Device_Class(EvdevClass cls) {
 }
 
 _X_EXPORT void gestures_log(int verb, const char* fmt, ...) {
+  int msg_size = 256;
+  char msg[msg_size];
+
   va_list args;
   va_start(args, fmt);
-  if (verb > 0)
-    xf86VDrvMsgVerb(-1, X_INFO, 7, fmt, args);
-  else
-    xf86VDrvMsgVerb(-1, X_ERROR, 0, fmt, args);
+  vsnprintf(msg, msg_size, fmt, args);
   va_end(args);
+  if (verb > 0)
+    LogMessageVerbSigSafe(X_INFO, 7, msg, "");
+  else
+    LogMessageVerbSigSafe(X_ERROR, 0, msg, "");
 }

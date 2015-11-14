@@ -115,8 +115,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-unknown-linux-gnu
-host_triplet = x86_64-unknown-linux-gnu
+build_triplet = x86_64-pc-linux-gnu
+host_triplet = x86_64-pc-linux-gnu
 subdir = man
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -162,7 +162,7 @@ AUTOMAKE = ${SHELL} /home/hugh/Downloads/xf86-input-cmt/missing automake-1.14
 AWK = gawk
 BASE_CFLAGS =  -Wall -Wpointer-arith -Wmissing-declarations -Wformat=2 -Wstrict-prototypes -Wmissing-prototypes -Wnested-externs -Wbad-function-cast -Wold-style-definition -Wdeclaration-after-statement -Wunused -Wuninitialized -Wshadow -Wcast-qual -Wmissing-noreturn -Wmissing-format-attribute -Wredundant-decls -Werror=implicit -Werror=nonnull -Werror=init-self -Werror=main -Werror=missing-braces -Werror=sequence-point -Werror=return-type -Werror=trigraphs -Werror=array-bounds -Werror=write-strings -Werror=address -Werror=int-to-pointer-cast -Werror=pointer-to-int-cast
 CC = gcc -std=gnu99
-CCDEPMODE = depmode=gcc3
+CCDEPMODE = depmode=none
 CFLAGS = -g -O2
 CHANGELOG_CMD = (GIT_DIR=$(top_srcdir)/.git git log > $(top_srcdir)/.changelog.tmp && mv $(top_srcdir)/.changelog.tmp $(top_srcdir)/ChangeLog) || (rm -f $(top_srcdir)/.changelog.tmp; touch $(top_srcdir)/ChangeLog; echo 'git directory not found: installing possibly empty changelog.' >&2)
 CPP = gcc -E
@@ -202,7 +202,7 @@ LIB_MAN_SUFFIX = 3
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAINT = 
+MAINT = #
 MAKEINFO = ${SHELL} /home/hugh/Downloads/xf86-input-cmt/missing makeinfo
 MANIFEST_TOOL = :
 MAN_SUBSTS = 	-e 's|__vendorversion__|"$(PACKAGE_STRING)" "$(XORG_MAN_PAGE)"|' 	-e 's|__xorgversion__|"$(PACKAGE_STRING)" "$(XORG_MAN_PAGE)"|' 	-e 's|__xservername__|Xorg|g' 	-e 's|__xconfigfile__|xorg.conf|g' 	-e 's|__projectroot__|$(prefix)|g' 	-e 's|__apploaddir__|$(appdefaultdir)|g' 	-e 's|__appmansuffix__|$(APP_MAN_SUFFIX)|g' 	-e 's|__drivermansuffix__|$(DRIVER_MAN_SUFFIX)|g' 	-e 's|__adminmansuffix__|$(ADMIN_MAN_SUFFIX)|g' 	-e 's|__libmansuffix__|$(LIB_MAN_SUFFIX)|g' 	-e 's|__miscmansuffix__|$(MISC_MAN_SUFFIX)|g' 	-e 's|__filemansuffix__|$(FILE_MAN_SUFFIX)|g'
@@ -233,8 +233,8 @@ SHELL = /bin/bash
 STRICT_CFLAGS =  -pedantic -Werror -Werror=attributes
 STRIP = strip
 VERSION = 0.0.1
-XORG_CFLAGS = -pthread -fvisibility=hidden -I/usr/include/pixman-1 -I/usr/include/mirclient -I/usr/include/libdrm -I/usr/include/mircommon -I/usr/include/xorg -I/usr/include/X11/dri  
-XORG_LIBS =  
+XORG_CFLAGS = -fvisibility=hidden -pthread -I/usr/include/pixman-1 -I/usr/include/libdrm -I/usr/include/mirclient -I/usr/include/mircommon -I/usr/include/xorg -I/usr/include/X11/dri 
+XORG_LIBS = 
 XORG_MAN_PAGE = X Version 11
 abs_builddir = /home/hugh/Downloads/xf86-input-cmt/man
 abs_srcdir = /home/hugh/Downloads/xf86-input-cmt/man
@@ -249,43 +249,43 @@ am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-unknown-linux-gnu
-build_alias = 
+build = x86_64-pc-linux-gnu
+build_alias = x86_64-linux-gnu
 build_cpu = x86_64
 build_os = linux-gnu
-build_vendor = unknown
+build_vendor = pc
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-unknown-linux-gnu
+host = x86_64-pc-linux-gnu
 host_alias = 
 host_cpu = x86_64
 host_os = linux-gnu
-host_vendor = unknown
+host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
-infodir = ${datarootdir}/info
+infodir = ${prefix}/share/info
 inputdir = ${exec_prefix}/lib/xorg/modules/input
 install_sh = ${SHELL} /home/hugh/Downloads/xf86-input-cmt/install-sh
 libdir = ${exec_prefix}/lib
-libexecdir = ${exec_prefix}/libexec
+libexecdir = ${prefix}/lib/xf86-input-cmt
 localedir = ${datarootdir}/locale
-localstatedir = ${prefix}/var
-mandir = ${datarootdir}/man
+localstatedir = /var
+mandir = ${prefix}/share/man
 mkdir_p = $(MKDIR_P)
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /usr/local
+prefix = /usr
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
 sdkdir = /usr/include/xorg
 sharedstatedir = ${prefix}/com
 srcdir = .
-sysconfdir = ${prefix}/etc
+sysconfdir = /etc
 target_alias = 
 top_build_prefix = ../
 top_builddir = ..
@@ -293,7 +293,7 @@ top_srcdir = ..
 all: all-am
 
 .SUFFIXES:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+$(srcdir)/Makefile.in: # $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -318,9 +318,9 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 
-$(top_srcdir)/configure:  $(am__configure_deps)
+$(top_srcdir)/configure: # $(am__configure_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+$(ACLOCAL_M4): # $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 

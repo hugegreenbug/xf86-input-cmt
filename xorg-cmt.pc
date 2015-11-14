@@ -1,6 +1,0 @@
-sdkdir=/usr/include/xorg
-
-Name: xorg-cmt
-Description: X.Org cmt input driver.
-Version: 0.0.1
-Cflags: -I${sdkdir}

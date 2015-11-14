@@ -76,6 +76,8 @@ static void libevdev_log_x(void* udata, int level, const char* format, ...) {
   InputInfoPtr info = udata;
   int verb;
   int type;
+  int msg_size = 256;
+  char msg[msg_size];
 
   va_list args;
   va_start(args, format);
@@ -89,8 +91,10 @@ static void libevdev_log_x(void* udata, int level, const char* format, ...) {
     type = X_ERROR;
     verb = -1;
   }
-  xf86VIDrvMsgVerb(info, type, verb, format, args);
+
+  vsnprintf(msg, msg_size, format, args);
   va_end(args);
+  LogMessageVerbSigSafe(type, verb, msg, "");
 }
 
 /**
@@ -397,6 +401,8 @@ InitializeXDevice(DeviceIntPtr dev)
         BTN_LABEL_PROP_BTN_LEFT,
         BTN_LABEL_PROP_BTN_MIDDLE,
         BTN_LABEL_PROP_BTN_RIGHT,
+        BTN_LABEL_PROP_BTN_WHEEL_UP,
+        BTN_LABEL_PROP_BTN_WHEEL_DOWN,
         BTN_LABEL_PROP_BTN_BACK,
         BTN_LABEL_PROP_BTN_FORWARD,
     };
@@ -412,8 +418,10 @@ InitializeXDevice(DeviceIntPtr dev)
         1,
         2,
         3,
-        8,  /* Back */
-        9   /* Forward */
+        4,  /* Scroll Up */
+        5,  /* Scroll Down */
+        6,  /* Back */
+        7   /* Forward */
     };
     int i;
 
@@ -474,6 +482,12 @@ InitializeXDevice(DeviceIntPtr dev)
                 mode);
         xf86InitValuatorDefaults(dev, i);
     }
+
+    /* Inititialize the Scroll Valuators */
+    SetScrollValuator(dev, CMT_AXIS_SCROLL_X, SCROLL_TYPE_HORIZONTAL,
+		      30, 0);
+    SetScrollValuator(dev, CMT_AXIS_SCROLL_Y, SCROLL_TYPE_VERTICAL,
+                      30, 0);
 
     /* Initialize keyboard device struct. Based on xf86-input-evdev,
        do not allow any rule/layout/etc changes. */

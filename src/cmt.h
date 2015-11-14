@@ -12,19 +12,19 @@
 #include <gesture.h>
 #include <properties.h>
 // todo(denniskempin): allow libevdev to be included before X headers
-#include <libevdev/libevdev.h>
+#include <libevdevc/libevdevc.h>
 
 #define DBG_VERB 7
 #define DBG(info, format, ...) \
-    xf86IDrvMsgVerb((info), X_INFO, DBG_VERB, "%s():%d: " format, \
+      LogMessageVerbSigSafe(X_INFO, DBG_VERB, "%s():%d: " format,   \
         __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define PROBE_DBG(info, format, ...) \
-    xf86IDrvMsgVerb((info), X_PROBED, DBG_VERB, "%s():%d: " format, \
+      LogMessageVerbSigSafe(X_PROBED, DBG_VERB, "%s():%d: " format, \
         __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define CONFIG_DBG(info, format, ...) \
-    xf86IDrvMsgVerb((info), X_CONFIG, DBG_VERB, "%s():%d: " format, \
+    LogMessageVerbSigSafe(X_CONFIG, DBG_VERB, "%s():%d: " format, \
         __FUNCTION__, __LINE__, ##__VA_ARGS__)
 
 #define ERR(info, ...) \
@@ -67,6 +67,8 @@ enum CMT_BUTTON {
     CMT_BTN_LEFT = 1,
     CMT_BTN_MIDDLE,
     CMT_BTN_RIGHT,
+    CMT_BTN_WHEEL_UP,
+    CMT_BTN_WHEEL_DOWN,
     CMT_BTN_BACK,
     CMT_BTN_FORWARD
 };

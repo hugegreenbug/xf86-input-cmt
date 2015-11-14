@@ -87,7 +87,7 @@ void xf86IDrvMsg(LocalDevicePtr dev, MessageType type,
                  const char* format, ...) {
   va_list args;
   va_start(args, format);
-  xf86VIDrvMsgVerb(dev, type, -1, format, args);
+  LogMessageVerbSigSafe(type, -1, format, args);
   va_end(args);
 }
 
@@ -95,7 +95,7 @@ void xf86IDrvMsgVerb(LocalDevicePtr dev, MessageType type, int verb,
                      const char* format, ...) {
   va_list args;
   va_start(args, format);
-  xf86VIDrvMsgVerb(dev, type, verb, format, args);
+  LogMessageVerbSigSafe(type, verb, format, args);
   va_end(args);
 }
 
