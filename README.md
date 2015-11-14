@@ -7,7 +7,6 @@ This driver depends on libgestures: https://github.com/hugegreenbug/libgestures 
 
 Compiling
 ==============
-./apply_patches.sh
 ./configure --prefix=/usr
 make
 make install 
