@@ -1,0 +1,4 @@
+xf86-input-cmt for Debian
+-------------------------
+
+You need to copy the config file for your device.  Find the config file for your device in: /usr/share/xf86-input-cmt and copy it to /usr/share/X11/xorg.conf.d

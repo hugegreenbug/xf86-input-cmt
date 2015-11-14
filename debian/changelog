@@ -1,0 +1,93 @@
+xf86-input-cmt (2.0.6-10ubuntu1) vivid-galliumos; urgency=medium
+
+  * A fix for external mouse buttons
+  * Additional and updated config files
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Sat, 14 Nov 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.6-9ubuntu1) vivid-galliumos; urgency=medium
+
+  * Another change for 40-touchpad-cmt.conf
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Wed, 28 Oct 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.6-8ubuntu1) vivid-galliumos; urgency=medium
+
+  * Another change for 40-touchpad-cmt.conf
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Wed, 28 Oct 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.6-6ubuntu1) vivid-galliumos; urgency=medium
+
+  * Another change for 40-touchpad-cmt.conf
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Sat, 26 Sep 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.6-5ubuntu1) vivid-galliumos; urgency=medium
+
+  * Another change for 40-touchpad-cmt.conf
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Sat, 26 Sep 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.6-4ubuntu1) vivid-galliumos; urgency=medium
+
+  * Another fix to 40-touchpad-cmt.conf
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Fri, 11 Sep 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.6-3ubuntu1) vivid-galliumos; urgency=medium
+
+  * Fixed 40-touchpad-cmt.conf
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Sun, 06 Sep 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.6-2ubuntu1) vivid-galliumos; urgency=medium
+
+  * Updated mouse.conf
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Sun, 06 Sep 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.6-1ubuntu1) vivid-galliumos; urgency=medium
+
+  * Updated config files and installed mouse.conf and touchscreen.conf to /usr/share/X11/xorg.conf.d
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Fri, 04 Sep 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.5-1ubuntu1) vivid; urgency=medium
+
+  * Updated config files with some fixes 
+
+ -- Hugh Greenberg <hugegreenbug@gmail.com>  Sun, 24 May 2015 22:33:16 -0600
+
+xf86-input-cmt (2.0.4-1ubuntu3) vivid; urgency=medium
+
+  * logging fix
+  * including modified and new xorg files
+
+ -- Hugh Greenberg <hugegreenbug@gmail.com>  Mon, 04 May 2015 14:16:58 -0400
+
+xf86-input-cmt (2.0.3-1ubuntu1) trusty; urgency=medium
+
+  *  Minor patch for stopping Xorg from complaining about unsafe logging
+
+ -- Hugh Greenberg <hugegreenbug@gmail.com>  Sun, 15 Mar 2015 23:17:36 -0600
+
+xf86-input-cmt (2.0-1ubuntu11) vivid; urgency=medium
+
+  * Config files were not previously included 
+
+ -- Hugh Greenberg <hugegreenbug@gmail.com>  Fri, 13 Mar 2015 19:27:02 -0600
+
+xf86-input-cmt (2.0-1ubuntu7) vivid; urgency=medium
+
+  * Dependency version changes
+  * Last package wasn't installing /usr/share/X11/xorg.conf.d/40-touchpad-cmt.conf 
+
+ -- Hugh Greenberg <hugegreenbug@gmail.com>  Thu, 12 Mar 2015 09:30:03 -0600
+
+xf86-input-cmt (2.0-1ubuntu1) vivid; urgency=medium
+
+  * Synced latest ChromeOS code and configs
+  * Removed australian scrolling in driver since it is now in libgestures
+    
+ -- Hugh Greenberg <hugegreenbug@gmail.com>  Wed, 11 Mar 2015 11:59:41 -0600

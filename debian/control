@@ -1,0 +1,24 @@
+Source: xf86-input-cmt
+Section: x11
+Priority: extra
+Maintainer: Hugh Greenberg <hugegreenbug@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), 
+ autotools-dev,
+ x11proto-input-dev,
+ xserver-xorg-dev,
+ libgestures (>= 2.0),
+ libgestures-dev (>= 2.0),
+ libevdevc-dev (>=2.0),
+ xutils-dev,
+ pkg-config
+Standards-Version: 3.9.4
+Homepage: https://github.com/hugegreenbug/xf86-input-cmt
+#Vcs-Git: git://git.debian.org/collab-maint/xf86-input-cmt.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/xf86-input-cmt.git;a=summary
+
+Package: xf86-input-cmt
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, 
+  libgestures (>= 2.0), libevdevc (>= 2.0)
+Description: ChromiumOS touchpad driver
+ X11 touchpad driver from ChromiumOS
