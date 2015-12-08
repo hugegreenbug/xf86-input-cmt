@@ -401,8 +401,6 @@ InitializeXDevice(DeviceIntPtr dev)
         BTN_LABEL_PROP_BTN_LEFT,
         BTN_LABEL_PROP_BTN_MIDDLE,
         BTN_LABEL_PROP_BTN_RIGHT,
-        BTN_LABEL_PROP_BTN_WHEEL_UP,
-        BTN_LABEL_PROP_BTN_WHEEL_DOWN,
         BTN_LABEL_PROP_BTN_BACK,
         BTN_LABEL_PROP_BTN_FORWARD,
     };
@@ -419,9 +417,7 @@ InitializeXDevice(DeviceIntPtr dev)
         2,
         3,
         4,  /* Scroll Up */
-        5,  /* Scroll Down */
-        6,  /* Back */
-        7   /* Forward */
+        5   /* Scroll Down */
     };
     int i;
 
@@ -485,9 +481,9 @@ InitializeXDevice(DeviceIntPtr dev)
 
     /* Inititialize the Scroll Valuators */
     SetScrollValuator(dev, CMT_AXIS_SCROLL_X, SCROLL_TYPE_HORIZONTAL,
-		      30, 0);
+		      1.0, 0);
     SetScrollValuator(dev, CMT_AXIS_SCROLL_Y, SCROLL_TYPE_VERTICAL,
-                      30, 0);
+                      1.0, 0);
 
     /* Initialize keyboard device struct. Based on xf86-input-evdev,
        do not allow any rule/layout/etc changes. */

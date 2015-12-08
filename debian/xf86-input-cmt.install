@@ -1,6 +1,4 @@
 xorg-conf/40-touchpad-cmt.conf   usr/share/X11/xorg.conf.d
-xorg-conf/20-touchscreen.conf   usr/share/X11/xorg.conf.d
-xorg-conf/20-mouse.conf   usr/share/X11/xorg.conf.d
 xorg-conf/50-touchpad-cmt-aebl.conf   usr/share/xf86-input-cmt
 xorg-conf/50-touchpad-cmt-alex.conf   usr/share/xf86-input-cmt
 xorg-conf/50-touchpad-cmt-banjo.conf   usr/share/xf86-input-cmt

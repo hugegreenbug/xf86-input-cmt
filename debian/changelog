@@ -1,3 +1,11 @@
+xf86-input-cmt (2.0.6-13ubuntu1) vivid-galliumos; urgency=medium
+
+  * Changed scroll valuator
+  * Removed 20-mouse.conf and 20-touchpad.conf from the deb
+  * Reverted button changes
+
+ -- Hugh Greenberg <hugh@galliumos.org>  Mon, 7 Dec 2015 22:33:16 -0600
+
 xf86-input-cmt (2.0.6-12ubuntu1) vivid-galliumos; urgency=medium
 
   * Changed the tap drag delay to account for the new tap to click fix filter
