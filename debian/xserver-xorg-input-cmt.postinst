@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+CB_MODEL="$(dmidecode | grep "Product Name" | awk '{print tolower($3)}')"
+
+# Install model specific config
+case "$1" in
+	configure)
+		if [ -r "/usr/share/xf86-input-cmt/50-touchpad-cmt-$CB_MODEL.conf" ]; then
+			rm -f /usr/share//usr/share/X11/xorg.conf.d/50-touchpad-cmt-*
+			cp -f /usr/share/xf86-input-cmt/50-touchpad-cmt-$CB_MODEL.conf /usr/share/X11/xorg.conf.d/
+		fi
+	;;
+esac

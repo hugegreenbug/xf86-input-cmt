@@ -1,3 +1,16 @@
+xf86-input-cmt (2.0.6-13ubuntu2) vivid-galliumos; urgency=medium
+
+  * Fix libgestures dependency version
+  * Rename binary package to xserver-xorg-input-cmt
+  * Replace xserver-xorg-input-synaptics-lts-vivid
+  * Build with xserver-xorg-dev-lts-vivid if available
+  * Install/Remove model specific config during install/removal
+  * Add dmidecode dependency for detecting model
+  * Improve parrot config by borrowing tunings from peppy
+  * Fix missing configs by installing all configs from source tree
+
+ -- Eugene San (eugenesan) <eugenesan@gmail.com>  Fri, 25 Dec 2015 08:04:45 -0500
+
 xf86-input-cmt (2.0.6-13ubuntu1) vivid-galliumos; urgency=medium
 
   * Changed scroll valuator

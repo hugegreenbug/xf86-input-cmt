@@ -1,0 +1,4 @@
+xorg-conf/40-touchpad-cmt.conf   usr/share/X11/xorg.conf.d
+xorg-conf/50-touchpad-cmt-*     usr/share/xf86-input-cmt/
+xorg-conf/files/daisy_linearity.dat   usr/share/xf86-input-cmt/files
+xorg-conf/files/lumpy_linearity.dat   usr/share/xf86-input-cmt/files
