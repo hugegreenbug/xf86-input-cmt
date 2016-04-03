@@ -21,13 +21,13 @@ If you use the Ubuntu package, the config files are installed in /usr/share/xf86
 You will also need to move your old config file out of the way or remove the previous driver.  If you were using the synaptics driver, move the synaptics.conf (/usr/share/X11/xorg.conf.d/50-synaptics.conf on Ubuntu) to something other than .conf or remove the synaptics driver.
 
 Options can be modified with xinput.  You can list all the properties available to change:
-
+```
 xinput --list-props 12
-
+```
 Where 12 is the id of your trackpad. It may or may not be 12.  You can list all of your devices to find which one is your trackpad:
-
+```
 xinput
-
+```
 Place the options you wish to change in the touchpad config file that you copied over to /usr/share/X11/xorg.conf.d.
 
 
