@@ -8,7 +8,9 @@ This driver depends on libgestures: https://github.com/hugegreenbug/libgestures 
 Compiling
 ==============
 ./configure --prefix=/usr
+
 make
+
 make install
 
 Configuring
